@@ -1,47 +1,12 @@
 <template>
   <div id="app">
-    <amplify-authenticator usernameAlias="email">
-      <amplify-sign-up
-        slot="sign-up"
-        :form-fields.prop="signUpFields"
-      ></amplify-sign-up>
-      <div v-if="authState === 'signedin' && user && user.attributes">
-        <div>Hello, {{user.attributes.name}}</div>
-      </div>
-      <amplify-sign-out></amplify-sign-out>
-    </amplify-authenticator>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
-
-<script>
-import { onAuthUIStateChange } from '@aws-amplify/ui-components'
-
-export default {
-  name: 'AuthStateApp',
-  created() {
-    this.unsubscribeAuth = onAuthUIStateChange((authState, authData) => {
-      this.authState = authState;
-      this.user = authData;
-    })
-  },
-  data() {
-    return {
-      user: {},
-      signUpFields: [
-        { type: 'username', label: 'Username (Email) *', required: true },
-        { type: 'password', label: 'Password *', required: true },
-        { type: 'name', label: 'Name *', required: true },
-        { type: 'phone_number', label: 'Phone Number *', required: true }
-      ],
-      authState: undefined,
-      unsubscribeAuth: undefined
-    }
-  },
-  beforeDestroy() {
-    this.unsubscribeAuth();
-  }
-}
-</script>
 
 <style>
 #app {
@@ -50,6 +15,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
