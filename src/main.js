@@ -4,6 +4,7 @@ import './assets/tailwind.css'
 import Amplify from 'aws-amplify'
 import '@aws-amplify/ui-vue'
 import router from './router'
+import store from './store'
 
 const AWS_REGION = 'us-east-1'
 const COGNITO_USER_POOL_ID = 'us-east-1_w7a4BGpsr'
@@ -32,5 +33,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
