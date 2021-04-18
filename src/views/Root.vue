@@ -31,7 +31,7 @@
     </div>
 
     <!-- sign up modal -->
-    <div v-if="step != ''" class="fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div v-if="showModal != ''" class="fixed w-full h-full top-0 left-0 flex items-center justify-center">
       <div class="absolute w-full h-full bg-gray-900 opacity-50" @click.prevent="setSignUpStep('')"></div>
 
       <div class="modal-main bg-white w-11/12 mx-auto rounded-lg z-50 overflow-y-auto max-h-full">Modal</div>
@@ -40,20 +40,21 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Root',
-  data() {
-    return {
-      step: ''
-    }
+  computed: {
+    ...mapGetters('signup', [
+      'showModal'
+    ])
   },
   methods: {
     showSignInPage() {
       this.$router.push('Login')
     },
-    setSignUpStep(step) {
-      this.step = step
-    }
+    ...mapActions('signup', [
+      'setSignUpStep'
+    ])
   }
 }
 </script>
