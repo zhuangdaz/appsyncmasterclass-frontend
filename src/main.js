@@ -5,6 +5,7 @@ import Amplify from 'aws-amplify'
 import '@aws-amplify/ui-vue'
 import router from './router'
 import store from './store'
+import directives from './directives'
 
 const AWS_REGION = 'us-east-1'
 const COGNITO_USER_POOL_ID = 'us-east-1_w7a4BGpsr'
@@ -30,6 +31,8 @@ const myAppConfig = {
 Amplify.configure(myAppConfig)
 
 Vue.config.productionTip = false
+
+Vue.use(directives)
 
 new Vue({
   router,
