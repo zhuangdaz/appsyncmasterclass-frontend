@@ -124,6 +124,33 @@
             <button @click="revealPassword = !revealPassword" class="text-blue pl-2">Reveal password</button>
           </div>
         </div>
+
+        <div v-if="showModal === 'step4'">
+          <div class="pl-1 pr-4 py-1 h-12">
+            <button @click="setSignUpStep('step3')" class="absolute rounded-full p-2 pl-3 hover:bg-lightblue">
+              <i class="fas fa-arrow-left text-blue"></i>
+            </button>
+            <p class="flex items-start ml-12 p-2 text-xl font-extrabold">Step 4 of 5</p>
+          </div>
+          <div class="pt-5 px-8">
+            <div class="flex justify-between items-center pb-8">
+              <p class="text-2xl font-bold">Create your account</p>
+            </div>
+
+            <div class="w-full bg-lightblue border-b-2 border-dark mb-6 p-2">
+              <input v-model="name" class="w-full py-2 bg-lightblue text-lg" type="text">
+            </div>
+            <div class="w-full bg-lightblue border-b-2 border-dark mb-6 p-2">
+              <input v-model="email" class="w-full py-2 bg-lightblue text-lg" type="text">
+            </div>
+            <div class="w-full bg-lightblue border-b-2 border-dark mb-6 p-2">
+              <input v-model="birthDate" class="w-full py-2 bg-lightblue text-lg" type="text">
+            </div>
+
+            <p>By signing up, you agree to our <a href="#" class="text-blue">Terms</a>, <a href="#" class="text-blue">Privacy Policy</a> and <a href="#" class="text-blue">Cookie Use</a>.</p>
+            <button @click="signMeUp()" class="w-full rounded-full mt-4 py-3 bg-blue text-white font-bold hover:bg-darkblue">Sign up</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -154,6 +181,22 @@ export default {
     ...mapActions('signup', [
       'setSignUpStep'
     ]),
+    ...mapActions('authentication', [
+      'signUp'
+    ]),
+    async signMeUp() {
+      try {
+        await this.signUp({
+          username: this.email,
+          password: this.password,
+          name: this.name
+        })
+        this.setSignUpStep('step5')
+      } catch(error) {
+        alert('Error signing up, please check console for error detail')
+        console.log('error signing up:', error)
+      }
+    },
     esc() {
       this.setSignUpStep('')
     }
