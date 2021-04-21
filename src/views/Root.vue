@@ -37,7 +37,7 @@
       <div class="modal-main bg-white w-11/12 mx-auto rounded-lg z-50 overflow-y-auto max-h-full">
         <div v-if="showModal === 'step1'">
           <div class="pl-1 pr-4 py-1 h-12">
-            <button @click="setSignupStep('step2')" class="rounded-full bg-blue font-bold text-white mt-2 p-1 pl-3 pr-3 relative right-0 float-right hover:bg-darkblue" :class="`${!name || !email || !birthDate ? 'opacity-50 cursor-not-allowed':''}`">Next</button>
+            <button @click="setSignUpStep('step2')" class="rounded-full bg-blue font-bold text-white mt-2 p-1 pl-3 pr-3 relative right-0 float-right hover:bg-darkblue" :class="`${!name || !email || !birthDate ? 'opacity-50 cursor-not-allowed':''}`">Next</button>
             <i class="flex justify-center fab fa-twitter text-blue text-2xl mt-2 mb-8"></i>
           </div>
           <div class="pt-5 px-8">
@@ -56,6 +56,46 @@
             <p class="text-dark">This will not be shown publicly. Confirm your own age, even if this account is for business, a pet, or something else.</p>
             <div class="w-full bg-lightblue border-b-2 border-dark mb-8 p-2">
               <input v-model="birthDate" class="w-full bg-lightblue text-lg" type="text">
+            </div>
+          </div>
+        </div>
+
+        <div v-if="showModal === 'step2'">
+          <div class="pl-1 pr-4 py-1 h-12">
+            <button @click="setSignUpStep('step1')" class="absolute rounded-full p-2 pl-3 hover:bg-lightblue">
+              <i class="fas fa-arrow-left text-blue"/>
+            </button>
+            <button @click="setSignUpStep('step3')" class="rounded-full bg-blue font-bold text-white mt-2 p-1 pl-3 pr-3 relative right-0 float-right hover:bg-darkblue">Next</button>
+            <i class="flex justify-center fab fa-twitter text-blue text-2xl mt-2 mb-8"></i>
+          </div>
+
+          <div class="pt-5 px-8">
+            <div class="flex justify-between items-center pb-8">
+              <p class="text-2xl font-bold">Customize your experience</p>
+            </div>
+            
+            <div class="mt-5 mb-8">
+              <p class="font-bold text-xl mb-1">Get more out of Twitter</p>
+              <div class="flex justify-between items-top">
+                <p>Receive email about your Twitter activity and recommendations.</p>
+                <input class="mt-1 ml-2 mr-2" type="checkbox">
+              </div>
+            </div>
+
+            <div class="mt-5 mb-8">
+              <p class="font-bold text-xl mb-1">Connect with people you know</p>
+              <div class="flex justify-between items-top">
+                <p>Let others find your Twitter account by your email address.</p>
+                <input class="mt-1 ml-2 mr-2" type="checkbox">
+              </div>
+            </div>
+
+            <div class="mt-5 mb-5">
+              <p class="font-bold text-xl mb-1">Personalized ads</p>
+              <div class="flex justify-between items-top">
+                <p>You will always see ads on Twitter based on your Twitter activity. When this setting is enabled, Twitter may further personalize ads from Twitter advertisers, on and off Twitter, by combining your Twitter activity with other online activity and information from partners.</p>
+                <input class="mt-1 ml-2 mr-2" type="checkbox">
+              </div>
             </div>
           </div>
         </div>
