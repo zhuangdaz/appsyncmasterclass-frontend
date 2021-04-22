@@ -24,7 +24,7 @@ export default {
     commit("USER_SIGNUP", user)
   },
   async confirmSignUp(_, form) {
-    await Auth.confirmSignUp(form.username, form.verificationCode)
+    await Auth.confirmSignUp(form.email, form.verificationCode)
   },
   async signInUser({ dispatch }, form) {
     const user = await Auth.signIn(form.email, form.password)
